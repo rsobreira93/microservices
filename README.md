@@ -35,9 +35,12 @@
 [ ] Query das minhas matrículas
 [ ] Query de produtos
 [ ] Mutation de realizar matrícula
+<<<<<<< HEAD
 
 ### Para rodar as bases de dados com o docker
 
 ```base
 $ docker-compose up -d
 ```
+=======
+>>>>>>> 4ffa4ceff0224e109308688d36e1b97e21899f62
