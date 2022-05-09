@@ -38,6 +38,6 @@
 
 ### Para rodar as bases de dados com o docker
 
-```base
+```bash
 $ docker-compose up -d
 ```
