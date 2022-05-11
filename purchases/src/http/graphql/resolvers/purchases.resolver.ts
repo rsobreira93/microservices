@@ -13,7 +13,6 @@ import { ProductService } from 'src/services/product.service';
 import { PurchasesService } from '../../../services/purchases.service';
 import { AuthorizationGuard } from '../../auth/authorization.guard';
 import { CreatePurchaseInput } from '../inputs/create-purchase-input';
-import { Product } from '../models/product';
 import { Purchase } from '../models/purchase';
 
 @Resolver(() => Purchase)
@@ -30,7 +29,7 @@ export class PurchaseResolver {
     return this.purchaseService.listAllPurchases();
   }
 
-  @ResolveField(() => Product)
+  @ResolveField()
   product(@Parent() purchase: Purchase) {
     return this.productsService.getProductById(purchase.productId);
   }
