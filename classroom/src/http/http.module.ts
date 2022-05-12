@@ -4,7 +4,6 @@ import { GraphQLModule } from '@nestjs/graphql';
 import { DatabaseModule } from '../database/database.module';
 import path from 'node:path';
 import { ApolloDriver } from '@nestjs/apollo';
-import { TestResolver } from './auth/test.resolver';
 
 @Module({
   imports: [
@@ -15,6 +14,6 @@ import { TestResolver } from './auth/test.resolver';
       autoSchemaFile: path.resolve(process.cwd(), 'src/schema.gql'),
     }),
   ],
-  providers: [TestResolver],
+  providers: [],
 })
 export class HttpModule {}
