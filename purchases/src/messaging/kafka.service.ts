@@ -1,7 +1,8 @@
 import { ConfigService } from '@nestjs/config';
-import { OnModuleInit, OnModuleDestroy } from '@nestjs/common';
+import { OnModuleInit, OnModuleDestroy, Injectable } from '@nestjs/common';
 import { ClientKafka } from '@nestjs/microservices';
 
+@Injectable()
 export class KafkaService
   extends ClientKafka
   implements OnModuleInit, OnModuleDestroy
