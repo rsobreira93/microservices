@@ -7,26 +7,27 @@ import {
   ResolveField,
   Resolver,
 } from '@nestjs/graphql';
-import { AuthUser, CurrentUser } from '../../../http/auth/current-user';
-import { CustomersService } from '../../../services/customer.service';
-import { ProductService } from '../../../services/product.service';
+import { CustomersService } from '../../../services/customers.service';
+import { ProductsService } from '../../../services/products.service';
+
 import { PurchasesService } from '../../../services/purchases.service';
 import { AuthorizationGuard } from '../../auth/authorization.guard';
+import { AuthUser, CurrentUser } from '../../auth/current-user';
 import { CreatePurchaseInput } from '../inputs/create-purchase-input';
 import { Purchase } from '../models/purchase';
 
 @Resolver(() => Purchase)
-export class PurchaseResolver {
+export class PurchasesResolver {
   constructor(
-    private purchaseService: PurchasesService,
-    private productsService: ProductService,
+    private purchasesService: PurchasesService,
+    private productsService: ProductsService,
     private customersService: CustomersService,
   ) {}
 
   @Query(() => [Purchase])
   @UseGuards(AuthorizationGuard)
   purchases() {
-    return this.purchaseService.listAllPurchases();
+    return this.purchasesService.listAllPurchases();
   }
 
   @ResolveField()
@@ -50,7 +51,7 @@ export class PurchaseResolver {
       });
     }
 
-    return this.purchaseService.createPurchase({
+    return this.purchasesService.createPurchase({
       customerId: customer.id,
       productId: data.productId,
     });

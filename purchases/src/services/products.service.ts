@@ -8,7 +8,7 @@ interface CreateProductParams {
 }
 
 @Injectable()
-export class ProductService {
+export class ProductsService {
   constructor(private prisma: PrismaService) {}
 
   listAllProducts() {
@@ -24,7 +24,9 @@ export class ProductService {
   }
 
   async createProduct({ title }: CreateProductParams) {
-    const slug = slugify(title, { lower: true });
+    const slug = slugify(title, {
+      lower: true,
+    });
 
     const productWithSameSlug = await this.prisma.product.findUnique({
       where: {
@@ -33,10 +35,10 @@ export class ProductService {
     });
 
     if (productWithSameSlug) {
-      throw new Error('Another product with the same slug already exists');
+      throw new Error('Another product with same slug already exists.');
     }
 
-    return await this.prisma.product.create({
+    return this.prisma.product.create({
       data: {
         title,
         slug,

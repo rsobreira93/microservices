@@ -9,24 +9,24 @@ import { Enrollment } from '../models/enrollment';
 @Resolver(() => Enrollment)
 export class EnrollmentsResolver {
   constructor(
-    private enrollmentsServices: EnrollmentsService,
-    private studentsServices: StudentsService,
-    private coursesServices: CoursesService,
+    private enrollmentsService: EnrollmentsService,
+    private coursesService: CoursesService,
+    private studentsService: StudentsService,
   ) {}
 
   @Query(() => [Enrollment])
   @UseGuards(AuthorizationGuard)
   enrollments() {
-    return this.enrollmentsServices.listAllEnrollments();
+    return this.enrollmentsService.listAllEnrollments();
   }
 
   @ResolveField()
   student(@Parent() enrollment: Enrollment) {
-    return this.studentsServices.getStudentById(enrollment.studentId);
+    return this.studentsService.getStudentById(enrollment.studentId);
   }
 
   @ResolveField()
   course(@Parent() enrollment: Enrollment) {
-    return this.coursesServices.getCourseById(enrollment.courseId);
+    return this.coursesService.getCourseById(enrollment.courseId);
   }
 }

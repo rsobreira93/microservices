@@ -1,6 +1,3 @@
-// This is your Prisma schema file,
-// learn more about it in the docs: https://pris.ly/d/prisma-schema
-
 generator client {
   provider = "prisma-client-js"
 }
@@ -15,20 +12,22 @@ model Student {
 
   authUserId String? @unique
 
-  createAt    DateTime     @default(now())
-  updateAt    DateTime     @default(now()) @updatedAt
   enrollments Enrollment[]
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @default(now()) @updatedAt
 }
 
-model Curse {
+model Course {
   id String @id @default(uuid())
 
   title String
   slug  String @unique
 
-  createAt   DateTime     @default(now())
-  updateAt   DateTime     @default(now()) @updatedAt
   enrolledOn Enrollment[]
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @default(now()) @updatedAt
 }
 
 model Enrollment {
@@ -37,10 +36,10 @@ model Enrollment {
   student   Student @relation(fields: [studentId], references: [id])
   studentId String
 
-  curse   Curse  @relation(fields: [curseId], references: [id])
-  curseId String
+  course   Course @relation(fields: [courseId], references: [id])
+  courseId String
 
-  cancelAt DateTime?
-  createAt DateTime  @default(now())
-  updateAt DateTime  @default(now()) @updatedAt
+  canceledAt DateTime?
+  createdAt  DateTime  @default(now())
+  updatedAt  DateTime  @default(now()) @updatedAt
 }

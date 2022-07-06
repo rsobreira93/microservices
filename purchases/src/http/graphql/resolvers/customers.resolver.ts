@@ -6,10 +6,11 @@ import {
   Resolver,
   ResolveReference,
 } from '@nestjs/graphql';
-import { AuthUser, CurrentUser } from '../../auth/current-user';
+import { CustomersService } from '../../../services/customers.service';
 import { PurchasesService } from '../../../services/purchases.service';
-import { CustomersService } from '../../../services/customer.service';
+
 import { AuthorizationGuard } from '../../auth/authorization.guard';
+import { AuthUser, CurrentUser } from '../../auth/current-user';
 import { Customer } from '../models/customer';
 
 @Resolver(() => Customer)
@@ -25,7 +26,7 @@ export class CustomersResolver {
     return this.customersService.getCustomerByAuthUserId(user.sub);
   }
 
-  @ResolveField(() => Customer)
+  @ResolveField()
   purchases(@Parent() customer: Customer) {
     return this.purchasesService.listAllFromCustomer(customer.id);
   }

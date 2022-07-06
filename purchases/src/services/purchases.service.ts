@@ -1,7 +1,7 @@
-import { KafkaService } from './../messaging/kafka.service';
 import { Injectable } from '@nestjs/common';
 
 import { PrismaService } from '../database/prisma/prisma.service';
+import { KafkaService } from '../messaging/kafka.service';
 
 interface CreatePurchaseParams {
   customerId: string;
@@ -15,7 +15,7 @@ export class PurchasesService {
   listAllPurchases() {
     return this.prisma.purchase.findMany({
       orderBy: {
-        createAt: 'desc',
+        createdAt: 'desc',
       },
     });
   }
@@ -26,7 +26,7 @@ export class PurchasesService {
         customerId,
       },
       orderBy: {
-        createAt: 'desc',
+        createdAt: 'desc',
       },
     });
   }
@@ -39,7 +39,7 @@ export class PurchasesService {
     });
 
     if (!product) {
-      throw new Error('Product not found');
+      throw new Error('Product not found.');
     }
 
     const purchase = await this.prisma.purchase.create({

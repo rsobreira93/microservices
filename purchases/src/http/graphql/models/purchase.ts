@@ -9,7 +9,7 @@ enum PurchaseStatus {
 
 registerEnumType(PurchaseStatus, {
   name: 'PurchaseStatus',
-  description: 'Available purchase status',
+  description: 'Available purchase statuses',
 });
 
 @ObjectType()
@@ -21,7 +21,7 @@ export class Purchase {
   status: PurchaseStatus;
 
   @Field(() => Date)
-  createAt: Date;
+  createdAt: Date;
 
   @Field(() => Product)
   product: Product;
